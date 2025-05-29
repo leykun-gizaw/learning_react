@@ -8,6 +8,9 @@
     },
     {
       "path": "./libs/huggingface_api"
+    },
+    {
+      "path": "./apps/meme_generator"
     }
   ]
 }
