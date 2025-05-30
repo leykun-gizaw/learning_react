@@ -1,9 +1,11 @@
-import NxWelcome from './nx-welcome';
+import Header from './components/Header';
+import Main from './components/Main';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="@learning-react/meme_generator" />
+      <Header />
+      <Main />
     </div>
   );
 }
