@@ -1,17 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ImgFlipGetMemesResponse, Meme, MemeInfo } from '../../types';
 
 export default function Main() {
-  const [memeInfo, setMemeInfo] = useState({
+  const [memeInfo, setMemeInfo] = useState<MemeInfo>({
     topText: 'One does not simply not',
     bottomText: 'Walk into Mordor',
     imgUrl: 'http://i.imgflip.com/1bij.jpg',
   });
+  const [allMemes, setAllMemes] = useState<Meme[]>([]);
+
+  useEffect(() => {
+    fetch('https://api.imgflip.com/get_memes')
+      .then((response) => response.json())
+      .then((data: ImgFlipGetMemesResponse) => {
+        setAllMemes(data.data.memes);
+      });
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setMemeInfo((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+  const handleGenerateMeme = () => {
+    const randomIndex = Math.floor(Math.random() * allMemes.length);
+    const randomMeme = allMemes[randomIndex];
+    console.log(`Selected meme: ${randomMeme.name} (${randomMeme.url})`);
+    setMemeInfo((prev) => ({
+      ...prev,
+      imgUrl: randomMeme.url,
     }));
   };
 
@@ -44,7 +63,10 @@ export default function Main() {
             className="w-full mt-1 rounded border border-gray-300 pl-1 min-h-10 font-karla" /* .form input styles, font-karla needs tailwind.config.js setup */
           />
         </label>
-        <button className="col-span-2 rounded text-white cursor-pointer min-h-10 font-karla bg-gradient-to-r from-[#711F8D] to-[#A818DA]">
+        <button
+          className="col-span-2 rounded text-white cursor-pointer min-h-10 font-karla bg-gradient-to-r from-[#711F8D] to-[#A818DA] active:brightness-110"
+          onClick={handleGenerateMeme}
+        >
           {' '}
           {/* .form button styles, font-karla needs tailwind.config.js setup, custom gradient */}
           Get a new meme image 🖼
@@ -54,7 +76,7 @@ export default function Main() {
         {' '}
         {/* This div is just a container, the .meme styles are on the main tag */}
         <img
-          src="http://i.imgflip.com/1bij.jpg"
+          src={memeInfo.imgUrl}
           alt="meme"
           className="max-w-full h-auto rounded"
         />{' '}
