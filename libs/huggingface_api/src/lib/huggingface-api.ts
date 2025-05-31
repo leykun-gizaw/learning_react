@@ -11,8 +11,9 @@ export async function getRecipeFromIngredients(
 
   if (!ingredients || ingredients.length === 0) {
     console.error('No ingredients provided');
-    return null; // Handle the case where no ingredients are provided
+    return 'Please provide some ingredients to get a recipe.'; // User-friendly message
   }
+
   const userPrompt = `Here are the ingredients I have: ${ingredients.join(
     ', '
   )}. What can I make?`;
@@ -29,17 +30,21 @@ export async function getRecipeFromIngredients(
 
     if (!response || !response.choices || response.choices.length === 0) {
       console.error('No response from the model');
-      return null; // Handle the case where no response is received
+      return 'Sorry, the model could not generate a recipe at this time.'; // User-friendly message
     }
+
     const recipe = response.choices[0].message.content;
     if (!recipe) {
       console.error('No recipe generated');
-      return null; // Handle the case where no recipe is generated
+      return 'Sorry, no recipe could be generated with the provided ingredients.'; // User-friendly message
     }
+
     return recipe; // Return the generated recipe
   } catch (error) {
-    console.error('Error generating recipe:', error);
-    // Handle the error, e.g., return a default message or null
-    return null;
+    if (error instanceof Error && error.message.includes('exceeded')) {
+      return error.message.slice(1, -1);
+    }
+    console.error('An error occurred:', error);
+    return 'An unexpected error occurred. Please try again later.'; // Generic error message
   }
 }

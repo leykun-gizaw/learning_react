@@ -6,6 +6,7 @@ import { getRecipeFromIngredients } from '@learning-react/huggingface_api';
 export default function Main() {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [recipe, setRecipe] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (formData: FormData) => {
     const ingredient = formData.get('ingredient');
@@ -15,15 +16,14 @@ export default function Main() {
   };
 
   const getRecipe = async () => {
+    setRecipe('');
+    setIsLoading(true);
     const recipe = await getRecipeFromIngredients(
       ingredients,
       import.meta.env.VITE_HF_ACCESS_TOKEN
     );
-    if (recipe) {
-      setRecipe(recipe);
-    } else {
-      setRecipe("Sorry, I couldn't find a recipe with those ingredients.");
-    }
+    setRecipe(recipe || 'Something went wrong, please try again later.');
+    setIsLoading(false);
   };
 
   return (
@@ -42,7 +42,11 @@ export default function Main() {
         </button>
       </form>
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} showRecipes={getRecipe} />
+        <IngredientsList
+          ingredients={ingredients}
+          showRecipes={getRecipe}
+          isLoading={isLoading}
+        />
       )}
       {recipe && <ClaudeRecipe recipe={recipe} />}
     </main>
