@@ -1,11 +1,7 @@
-import NxWelcome from './nx-welcome';
+import Main from './components/Main';
 
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="@learning-react/Tenzies" />
-    </div>
-  );
+  return <Main />;
 }
 
 export default App;

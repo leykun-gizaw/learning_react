@@ -2,3 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: rgb(12, 36, 52); /* Light background color */
+  height: 100vh; /* Full height for the body */
+  padding: 2rem;
+}
+
+div#root {
+  height: 100%; /* Full height for the root div */
+  width: 100%; /* Full width for the root div */
+  max-height: 40rem;
+  max-width: 50rem; /* Set a maximum width for the root div */
+  margin: auto;
+}
