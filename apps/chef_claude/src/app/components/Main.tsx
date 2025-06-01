@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import IngredientsList from './MainComponents/IngredientsList';
 import ClaudeRecipe from './MainComponents/ClaudeRecipe';
 import { getRecipeFromIngredients } from '@learning-react/huggingface_api';
@@ -7,6 +7,7 @@ export default function Main() {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [recipe, setRecipe] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const recipeSection = useRef<HTMLDivElement>(null);
 
   const handleSubmit = (formData: FormData) => {
     const ingredient = formData.get('ingredient');
@@ -23,6 +24,11 @@ export default function Main() {
       import.meta.env.VITE_HF_ACCESS_TOKEN
     );
     setRecipe(recipe || 'Something went wrong, please try again later.');
+    recipeSection.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
     setIsLoading(false);
   };
 
@@ -46,6 +52,7 @@ export default function Main() {
           ingredients={ingredients}
           showRecipes={getRecipe}
           isLoading={isLoading}
+          recipeSection={recipeSection}
         />
       )}
       {recipe && <ClaudeRecipe recipe={recipe} />}

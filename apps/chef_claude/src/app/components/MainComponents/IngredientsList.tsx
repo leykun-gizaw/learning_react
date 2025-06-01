@@ -2,10 +2,12 @@ export default function IngredientsList({
   ingredients,
   showRecipes,
   isLoading,
+  recipeSection,
 }: {
   ingredients: string[];
   showRecipes: () => void;
   isLoading: boolean;
+  recipeSection: React.RefObject<HTMLDivElement | null>;
 }) {
   const ingredientListItems = ingredients.map((ingredient, index) => (
     <li key={index}>{ingredient}</li>
@@ -18,7 +20,10 @@ export default function IngredientsList({
       <ul className="list-disc mx-8">{ingredientListItems}</ul>
 
       {ingredients.length > 3 && (
-        <div className="mt-4 p-4 bg-[rgb(240,238,234)]  rounded-lg flex justify-between items-center">
+        <div
+          ref={recipeSection}
+          className="mt-4 p-4 bg-[rgb(240,238,234)]  rounded-lg flex justify-between items-center"
+        >
           <div>
             <h3 className="mb-2 text-xl font-medium">Ready for a recipe?</h3>
             <p className="text-gray-500 text-sm">
