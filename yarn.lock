@@ -1898,6 +1898,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@learning-react/Tenzies@workspace:apps/Tenzies":
+  version: 0.0.0-use.local
+  resolution: "@learning-react/Tenzies@workspace:apps/Tenzies"
+  languageName: unknown
+  linkType: soft
+
 "@learning-react/chef_claude@workspace:apps/chef_claude":
   version: 0.0.0-use.local
   resolution: "@learning-react/chef_claude@workspace:apps/chef_claude"
@@ -1909,6 +1915,12 @@ __metadata:
   resolution: "@learning-react/huggingface_api@workspace:libs/huggingface_api"
   dependencies:
     tslib: "npm:^2.3.0"
+  languageName: unknown
+  linkType: soft
+
+"@learning-react/meme_generator@workspace:apps/meme_generator":
+  version: 0.0.0-use.local
+  resolution: "@learning-react/meme_generator@workspace:apps/meme_generator"
   languageName: unknown
   linkType: soft
 
@@ -1946,10 +1958,12 @@ __metadata:
     jiti: "npm:2.4.2"
     jsdom: "npm:~22.1.0"
     jsonc-eslint-parser: "npm:^2.1.0"
+    nanoid: "npm:^5.1.5"
     nx: "npm:21.1.2"
     postcss: "npm:8.4.38"
     prettier: "npm:^2.6.2"
     react: "npm:19.0.0"
+    react-confetti: "npm:^6.4.0"
     react-dom: "npm:19.0.0"
     react-markdown: "npm:^10.1.0"
     tailwindcss: "npm:3.4.3"
@@ -9849,6 +9863,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "nanoid@npm:5.1.5"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 10c0/e6004f1ad6c7123eeb037062c4441d44982037dc043aabb162457ef6986e99964ba98c63c975f96c547403beb0bf95bc537bd7bf9a09baf381656acdc2975c3c
+  languageName: node
+  linkType: hard
+
 "natural-compare@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
@@ -10795,6 +10818,17 @@ __metadata:
     iconv-lite: "npm:0.4.24"
     unpipe: "npm:1.0.0"
   checksum: 10c0/b201c4b66049369a60e766318caff5cb3cc5a900efd89bdac431463822d976ad0670912c931fdbdcf5543207daf6f6833bca57aa116e1661d2ea91e12ca692c4
+  languageName: node
+  linkType: hard
+
+"react-confetti@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "react-confetti@npm:6.4.0"
+  dependencies:
+    tween-functions: "npm:^1.2.0"
+  peerDependencies:
+    react: ^16.3.0 || ^17.0.1 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/a0e1bfc826cc086e13c18f2f8997e1825025be8ea80f5b1ffdd4871babe89a6876eac99f43525d4d4cbf141fab2a9372f5d51d19fa5995b64e77e6717ac4b286
   languageName: node
   linkType: hard
 
@@ -12415,6 +12449,13 @@ __metadata:
   version: 1.0.6
   resolution: "tsscmp@npm:1.0.6"
   checksum: 10c0/2f79a9455e7e3e8071995f98cdf3487ccfc91b760bec21a9abb4d90519557eafaa37246e87c92fa8bf3fef8fd30cfd0cc3c4212bb929baa9fb62494bfa4d24b2
+  languageName: node
+  linkType: hard
+
+"tween-functions@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "tween-functions@npm:1.2.0"
+  checksum: 10c0/7e59295b8b0ee4132ed2fe335f56a9db5c87056dad6b6fd3011be72239fd20398003ddb4403bc98ad9f5c94468890830f64016edbbde35581faf95b32cda8305
   languageName: node
   linkType: hard
 
