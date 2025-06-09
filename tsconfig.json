@@ -14,6 +14,9 @@
     },
     {
       "path": "./apps/Tenzies"
+    },
+    {
+      "path": "./apps/Assembly-Endgame"
     }
   ]
 }
