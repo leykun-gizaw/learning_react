@@ -1,3 +1,5 @@
+import { languages } from '../utils/constants';
+
 export function App() {
   return (
     <div className="bg-[rgb(40,39,38)] h-screen text-white flex flex-col items-center">
@@ -18,6 +20,20 @@ export function App() {
             🎉
           </span>
         </p>
+      </section>
+      <section className="mt-10 flex flex-wrap gap-[2px] justify-center w-[350px]">
+        {languages.map((language) => (
+          <span
+            className="text-md rounded-md p-1"
+            key={language.name}
+            style={{
+              backgroundColor: language.backgroundColor,
+              color: language.color,
+            }}
+          >
+            {language.name}
+          </span>
+        ))}
       </section>
     </div>
   );
