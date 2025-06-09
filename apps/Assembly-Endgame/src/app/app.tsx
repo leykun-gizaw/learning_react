@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { languages } from '../utils/constants';
 import { generateKeyboard } from '../utils/helpers';
+import clsx from 'clsx';
 
 export function App() {
   const [keyboard, setKeyboard] = useState(() => generateKeyboard());
@@ -15,6 +16,34 @@ export function App() {
         className="bg-[rgb(50,50,50)] h-12 w-12 border-b flex justify-center items-center text-3xl font-extralight"
       ></span>
     ));
+
+  const keyboardElements = keyboard.map((key) => {
+    const keyStatusClass = clsx({
+      'bg-[rgb(252,186,41)]': true,
+      'text-[rgb(30,30,30)]': true,
+      'font-semibold': true,
+      'text-xl': true,
+      border: true,
+      'border-[rgb(168,168,168)]': true,
+      'w-12': true,
+      'h-12': true,
+      rounded: true,
+      'rounded-md': true,
+      'bg-[rgb(16,169,91)]': key.foundAt.length > 0 && key.clicked,
+      'bg-[rgb(236,93,73)]': key.foundAt.length === 0 && key.clicked,
+    });
+    const handleClick = () => {
+      setKeyboard(
+        keyboard.map((k) => (k.ltr === key.ltr ? { ...k, clicked: true } : k))
+      );
+    };
+    return (
+      <button key={key.ltr} className={keyStatusClass} onClick={handleClick}>
+        {key.ltr}
+      </button>
+    );
+  });
+
   return (
     <>
       <section className="title text-center mt-40 flex flex-col gap-2 max-w-96">
@@ -52,17 +81,8 @@ export function App() {
       <section className="mt-10 w-[500px] flex justify-center items-center gap-1">
         {letterElements}
       </section>
-      <section className="mt-10 text-center w-[500px]">
-        <div className="flex flex-wrap justify-center gap-2 mt-2">
-          {keyboard.map((key) => (
-            <button
-              key={key.ltr}
-              className="w-12 h-12 rounded-md bg-[rgb(252,186,41)] text-[rgb(30,30,30)] font-semibold text-xl border border-[rgb(168,168,168)]"
-            >
-              {key.ltr}
-            </button>
-          ))}
-        </div>
+      <section className="mt-10 text-center w-[500px] flex flex-wrap justify-center gap-2">
+        {keyboardElements}
       </section>
     </>
   );

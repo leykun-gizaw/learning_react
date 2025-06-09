@@ -15,6 +15,7 @@ export function generateKeyboard() {
     return {
       ltr,
       foundAt,
+      clicked: false,
     };
   });
 }
