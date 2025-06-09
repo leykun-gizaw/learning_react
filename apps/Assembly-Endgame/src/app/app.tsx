@@ -4,6 +4,17 @@ import { generateKeyboard } from '../utils/helpers';
 
 export function App() {
   const [keyboard, setKeyboard] = useState(() => generateKeyboard());
+
+  const letterElements = keyboard
+    .filter((key) => key.foundAt.length > 0)
+    .map((key) => key.foundAt)
+    .flat(1)
+    .map((index) => (
+      <span
+        key={index}
+        className="bg-[rgb(50,50,50)] h-12 w-12 border-b flex justify-center items-center text-3xl font-extralight"
+      ></span>
+    ));
   return (
     <>
       <section className="title text-center mt-40 flex flex-col gap-2 max-w-96">
@@ -38,7 +49,9 @@ export function App() {
           </span>
         ))}
       </section>
-      <section className="mt-10 text-center w-[500px]"></section>
+      <section className="mt-10 w-[500px] flex justify-center items-center gap-1">
+        {letterElements}
+      </section>
       <section className="mt-10 text-center w-[500px]">
         <div className="flex flex-wrap justify-center gap-2 mt-2">
           {keyboard.map((key) => (
