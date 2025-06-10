@@ -1,23 +1,7 @@
 import { type JSX, useState } from 'react';
 import { languages } from '../utils/constants';
-import { generateKeyboard } from '../utils/helpers';
+import { generateKeyboard, getFarewellText } from '../utils/helpers';
 import clsx from 'clsx';
-
-/**
- * - Show farewell messages when the user
- *  - Misses a letter
- *  - Wins the game
- *  - Loses the game
- *
- * - Create a new game button at the bottom
- *  - Make it visible when the game is won or lost
- *  - Clicking should reset the game
- *
- * - Disable the keyboard when the game is won or lost
- *
- * - When the game is lost, show the word that was to be guessed
- *  - Color missed letters the same color as missed keyboard keys
- */
 
 export function App() {
   const [keyboard, setKeyboard] = useState(() => generateKeyboard());
@@ -31,12 +15,6 @@ export function App() {
       .every((keyObj) => keyObj.clicked) && wrongAttempts < 8;
   const gameLost = wrongAttempts >= 8;
   const gameOver = gameWon || gameLost;
-
-  console.log(
-    gameWon,
-    gameLost
-    // `Game status: ${gameWon ? 'Won' : gameLost ? 'Lost' : 'In Progress'}`
-  );
 
   const LanguageElements = languages.map((language, idx) => {
     const classNames = clsx({
@@ -122,16 +100,9 @@ export function App() {
     );
   });
 
-  return (
-    <>
-      <section className="title text-center mt-40 flex flex-col gap-2 max-w-96">
-        <h1 className="text-2xl text-[rgb(249,244,218)]">Assembly: Endgame</h1>
-        <p className="text-[rgb(135,135,135)] max-w-[400px] text-lg">
-          Guess the word in under 8 attempts to keep the programming world safe
-          from Assembly!
-        </p>
-      </section>
-      <section className="mt-10 h-[60px] bg-[rgb(21,169,90)] w-[500px] rounded-lg flex flex-col justify-center items-center">
+  const generateWallText = () => {
+    const winMessage = (
+      <>
         <h2 className="text-center text-[rgb(249,244,218)] text-xl">
           You Won!
         </h2>
@@ -141,6 +112,54 @@ export function App() {
             🎉
           </span>
         </p>
+      </>
+    );
+    const loseMessage = (
+      <>
+        <h2 className="text-center text-[rgb(249,244,218)] text-xl">
+          Game Over!
+        </h2>
+        <p className="text-center">
+          You lose! Better start learning Assembly{' '}
+          <span role="img" aria-label="Cry emoji">
+            😭
+          </span>
+        </p>
+      </>
+    );
+    const lostLetterMessage =
+      wrongAttempts > 0 ? (
+        <p>{getFarewellText(languages[wrongAttempts - 1].name)}</p>
+      ) : null;
+
+    if (gameWon) return winMessage;
+    if (gameLost) return loseMessage;
+    if (wrongAttempts > 0) return lostLetterMessage;
+    return null;
+  };
+
+  return (
+    <>
+      <section className="title text-center mt-40 flex flex-col gap-2 max-w-96">
+        <h1 className="text-2xl text-[rgb(249,244,218)]">Assembly: Endgame</h1>
+        <p className="text-[rgb(135,135,135)] max-w-[400px] text-lg">
+          Guess the word in under 8 attempts to keep the programming world safe
+          from Assembly!
+        </p>
+      </section>
+      <section
+        className={
+          'mt-10 h-[60px] w-[500px] rounded-lg flex flex-col justify-center items-center text-base font-light italic ' +
+          clsx({
+            'bg-[rgb(21,169,90)]': gameWon,
+            'bg-[rgb(236,93,73)]': gameLost,
+            'bg-[rgb(122,94,167)]': wrongAttempts > 0 && !gameOver,
+            'rounded-none border border-[rgb(40,39,38)] border-dashed':
+              wrongAttempts > 0 && !gameOver,
+          })
+        }
+      >
+        {generateWallText()}
       </section>
       <section className="mt-10 flex flex-wrap gap-[2px] justify-center w-[350px] relative">
         {LanguageElements}
