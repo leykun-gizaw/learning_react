@@ -2,6 +2,7 @@ import { type JSX, useState } from 'react';
 import { languages } from '../utils/constants';
 import { generateKeyboard, getFarewellText } from '../utils/helpers';
 import clsx from 'clsx';
+import ReactConfetti from 'react-confetti';
 
 export function App() {
   const [keyboard, setKeyboard] = useState(() => generateKeyboard());
@@ -145,6 +146,14 @@ export function App() {
 
   return (
     <>
+      {gameWon && (
+        <ReactConfetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false}
+          numberOfPieces={200}
+        />
+      )}
       <section className="title text-center mt-40 flex flex-col gap-2 max-w-96">
         <h1 className="text-2xl text-[rgb(249,244,218)]">Assembly: Endgame</h1>
         <p className="text-[rgb(135,135,135)] max-w-[400px] text-lg">
