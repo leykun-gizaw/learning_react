@@ -7,13 +7,20 @@ import ReactConfetti from 'react-confetti';
 export function App() {
   const [keyboard, setKeyboard] = useState(() => generateKeyboard());
 
-  const wrongAttempts = keyboard
-    .filter((key) => key.foundAt.length === 0)
-    .reduce((acc, key) => acc + (key.clicked ? 1 : 0), 0);
+  const presentKeys = keyboard.filter((key) => key.foundAt.length > 0);
+  const missingKeys = keyboard.filter((key) => key.foundAt.length === 0);
+
+  const wrongAttempts = missingKeys.reduce(
+    (acc, key) => acc + (key.clicked ? 1 : 0),
+    0
+  );
+  const remainingGuesses = presentKeys.reduce(
+    (acc, key) => (key.clicked ? acc : acc + 1),
+    0
+  );
+
   const gameWon =
-    keyboard
-      .filter((keyObj) => keyObj.foundAt.length > 0)
-      .every((keyObj) => keyObj.clicked) && wrongAttempts < 8;
+    presentKeys.every((keyObj) => keyObj.clicked) && wrongAttempts < 8;
   const gameLost = wrongAttempts >= 8;
   const gameOver = gameWon || gameLost;
 
@@ -146,6 +153,7 @@ export function App() {
 
   return (
     <>
+      {/* Confetti */}
       {gameWon && (
         <ReactConfetti
           width={window.innerWidth}
@@ -154,12 +162,17 @@ export function App() {
           numberOfPieces={200}
         />
       )}
+
       <section className="title text-center mt-40 flex flex-col gap-2 max-w-96">
         <h1 className="text-2xl text-[rgb(249,244,218)]">Assembly: Endgame</h1>
         <p className="text-[rgb(135,135,135)] max-w-[400px] text-lg">
           Guess the word in under 8 attempts to keep the programming world safe
           from Assembly!
         </p>
+      </section>
+      <section className="mt-6 text-center text-[rgb(135,135,135)]">
+        <p>Wrong Attempts: {wrongAttempts} / 8</p>
+        <p>Remaining Letters: {remainingGuesses}</p>
       </section>
       <section
         className={
