@@ -95,6 +95,7 @@ export function App() {
       'rounded-md': true,
       'bg-[rgb(16,169,91)]': key.foundAt.length > 0 && key.clicked,
       'bg-[rgb(236,93,73)]': key.foundAt.length === 0 && key.clicked,
+      'opacity-50': gameOver && !key.clicked,
     });
     const handleClick = () => {
       setKeyboard(
@@ -176,7 +177,7 @@ export function App() {
       </section>
       <section
         className={
-          'mt-10 h-[60px] w-[500px] rounded-lg flex flex-col justify-center items-center text-base font-light italic ' +
+          'mt-10 h-[60px] w-[500px] rounded-sm p-2 flex flex-col justify-center items-center text-base font-light italic ' +
           clsx({
             'bg-[rgb(21,169,90)]': gameWon,
             'bg-[rgb(236,93,73)]': gameLost,
