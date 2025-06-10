@@ -3,13 +3,40 @@ import { languages } from '../utils/constants';
 import { generateKeyboard } from '../utils/helpers';
 import clsx from 'clsx';
 
+/**
+ * - Show farewell messages when the user
+ *  - Misses a letter
+ *  - Wins the game
+ *  - Loses the game
+ *
+ * - Create a new game button at the bottom
+ *  - Make it visible when the game is won or lost
+ *  - Clicking should reset the game
+ *
+ * - Disable the keyboard when the game is won or lost
+ *
+ * - When the game is lost, show the word that was to be guessed
+ *  - Color missed letters the same color as missed keyboard keys
+ */
+
 export function App() {
   const [keyboard, setKeyboard] = useState(() => generateKeyboard());
 
   const wrongAttempts = keyboard
     .filter((key) => key.foundAt.length === 0)
     .reduce((acc, key) => acc + (key.clicked ? 1 : 0), 0);
-  console.log('Wrong attempts:', wrongAttempts);
+  const gameWon =
+    keyboard
+      .filter((keyObj) => keyObj.foundAt.length > 0)
+      .every((keyObj) => keyObj.clicked) && wrongAttempts < 8;
+  const gameLost = wrongAttempts >= 8;
+  const gameOver = gameWon || gameLost;
+
+  console.log(
+    gameWon,
+    gameLost
+    // `Game status: ${gameWon ? 'Won' : gameLost ? 'Lost' : 'In Progress'}`
+  );
 
   const LanguageElements = languages.map((language, idx) => {
     const classNames = clsx({
@@ -84,7 +111,12 @@ export function App() {
       );
     };
     return (
-      <button key={key.ltr} className={keyStatusClass} onClick={handleClick}>
+      <button
+        key={key.ltr}
+        className={keyStatusClass}
+        onClick={handleClick}
+        disabled={gameOver}
+      >
         {key.ltr}
       </button>
     );
@@ -119,6 +151,16 @@ export function App() {
       <section className="mt-10 text-center w-[500px] flex flex-wrap justify-center gap-2">
         {keyboardElements}
       </section>
+      {gameOver && (
+        <section className="mt-10 text-center">
+          <button
+            className="bg-[rgb(17,181,229)] border border-white text-[rgb(30,30,30)] font-normal w-fit text-lg px-4 py-2 rounded-md"
+            onClick={() => setKeyboard(generateKeyboard())}
+          >
+            New Game
+          </button>
+        </section>
+      )}
     </>
   );
 }
