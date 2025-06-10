@@ -47,7 +47,7 @@ export function App() {
   });
 
   // I resisted the urge to use a for loop to insert letters into spans
-  // using innerText.
+  // using innerText. I wanted to keep it functional and declarative.
   const letterElements: JSX.Element[] = Array(
     keyboard
       .filter((key) => key.foundAt.length > 0)
@@ -60,9 +60,14 @@ export function App() {
         letterElements[index] = (
           <span
             key={index}
-            className="bg-[rgb(50,50,50)] h-12 w-12 border-b flex justify-center items-center text-3xl font-extralight"
+            className={
+              'bg-[rgb(50,50,50)] h-12 w-12 border-b flex justify-center items-center text-3xl font-extralight ' +
+              clsx({
+                'text-[rgb(236,93,73)]': gameLost && !keyObj.clicked,
+              })
+            }
           >
-            {keyObj.clicked ? keyObj.ltr : ''}
+            {keyObj.clicked || gameOver ? keyObj.ltr : ''}
           </span>
         );
       });
