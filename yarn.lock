@@ -1930,6 +1930,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@learning-react/otdb_api@workspace:libs/otdb_api":
+  version: 0.0.0-use.local
+  resolution: "@learning-react/otdb_api@workspace:libs/otdb_api"
+  languageName: unknown
+  linkType: soft
+
+"@learning-react/quizzical@workspace:apps/quizzical":
+  version: 0.0.0-use.local
+  resolution: "@learning-react/quizzical@workspace:apps/quizzical"
+  languageName: unknown
+  linkType: soft
+
 "@learning-react/source@workspace:.":
   version: 0.0.0-use.local
   resolution: "@learning-react/source@workspace:."

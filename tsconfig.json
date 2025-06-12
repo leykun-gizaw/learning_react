@@ -20,6 +20,9 @@
     },
     {
       "path": "./apps/quizzical"
+    },
+    {
+      "path": "./libs/otdb_api"
     }
   ]
 }
