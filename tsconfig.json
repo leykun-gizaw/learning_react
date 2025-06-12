@@ -17,6 +17,9 @@
     },
     {
       "path": "./apps/Assembly-Endgame"
+    },
+    {
+      "path": "./apps/quizzical"
     }
   ]
 }
