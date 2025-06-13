@@ -34,7 +34,7 @@ export default function QuestionsList({
   };
 
   return (
-    <ul className="w-3/4 text-[rgb(41,50,100)] mt-10">
+    <ul className="text-[rgb(41,50,100)] mt-10">
       {questions.map((question, index: number) => (
         <>
           <li key={index} className="mb-4">
