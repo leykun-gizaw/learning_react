@@ -7,8 +7,9 @@ export interface TransformedQuestion {
   choices: Choice[];
 }
 
-type Choice = {
+export type Choice = {
   id: string;
   text: string;
   isCorrect: boolean;
+  chosen: boolean;
 };

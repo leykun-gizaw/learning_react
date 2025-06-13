@@ -1,9 +1,9 @@
 import React from 'react';
 import Starter from './Starter';
-import { fetchQuestions, Question } from '@learning-react/otdb_api';
+import { fetchQuestions } from '@learning-react/otdb_api';
 import QuestionsList from './QuestionsList';
 import { transformQuestions } from '../utils/helpers';
-import { TransformedQuestion } from '../utils/types';
+import { Choice, TransformedQuestion } from '../utils/types';
 
 export function App() {
   const [questions, setQuestions] = React.useState<
@@ -12,8 +12,25 @@ export function App() {
 
   const handleStartQuiz = async () => {
     const response = await fetchQuestions();
-    console.log(transformQuestions(response.results));
     setQuestions(transformQuestions(response.results));
+  };
+  const handleChoose = (answerList: string[][]) => {
+    setQuestions((prevQuestions) => {
+      const updatedQuestions: TransformedQuestion[] = [];
+
+      answerList.forEach((answer) => {
+        prevQuestions?.forEach((question) => {
+          const choices = [...question.choices];
+          if (answer[0] === question.id) {
+            choices.forEach((choice) => {
+              if (answer[1] === choice.id) choice.chosen = true;
+            });
+          }
+          updatedQuestions.push({ ...question, choices });
+        });
+      });
+      return updatedQuestions;
+    });
   };
 
   return (
@@ -21,12 +38,7 @@ export function App() {
       {questions === null ? (
         <Starter handleStartQuiz={handleStartQuiz} />
       ) : (
-        <QuestionsList questions={questions} />
-      )}
-      {questions !== null && (
-        <button className="text-xl text-[rgb(256,247,251)] p-2 rounded-md bg-[rgb(76,90,158)] hover:bg-[rgb(70,84,152)] active:bg-[rgb(76,90,158)] w-fit">
-          {true ? 'Check Answers' : 'Play Again'}
-        </button>
+        <QuestionsList questions={questions} handleChoose={handleChoose} />
       )}
     </div>
   );

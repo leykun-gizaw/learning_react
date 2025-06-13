@@ -22,6 +22,7 @@ export const transformQuestions = (
         id: nanoid(),
         text: choice,
         isCorrect: choice === question.correct_answer,
+        chosen: false,
       })),
     };
   });
