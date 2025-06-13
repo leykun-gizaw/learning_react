@@ -15,7 +15,7 @@ export default function QuestionsList({
     );
     return choicesList.map((choice, index) => {
       return (
-        <div key={index}>
+        <li key={index}>
           <input
             type="radio"
             name={question.question}
@@ -24,24 +24,27 @@ export default function QuestionsList({
           />
           <label
             htmlFor={choice}
-            className="block cursor-pointer border border-[rgb(41,50,100)] peer-checked:bg-[rgb(214,219,245)] p-2 rounded-lg hover:bg-[rgb(214,219,245)]"
+            className="block cursor-pointer border border-[rgb(41,50,100)] peer-checked:bg-[rgb(214,219,245)] p-1 rounded-lg hover:bg-[rgb(214,219,245)]"
           >
             <span className="peer-checked:text-white">{choice}</span>
           </label>
-        </div>
+        </li>
       );
     });
   };
 
   return (
-    <ul className="w-full text-[rgb(41,50,100)]">
+    <ul className="w-3/4 text-[rgb(41,50,100)] mt-10">
       {questions.map((question, index: number) => (
-        <li key={index} className="mb-4">
-          <h2 className="text-xl font-semibold">{question.question}</h2>
-          <ul className="mt-2 flex flex-wrap gap-3">
-            {createChoicesList(question)}
-          </ul>
-        </li>
+        <>
+          <li key={index} className="mb-4">
+            <h2 className="text-xl font-semibold">{question.question}</h2>
+            <ul className="mt-2 flex flex-wrap gap-3">
+              {createChoicesList(question)}
+            </ul>
+          </li>
+          <hr className="border-[rgb(220,222,240)] my-4" />
+        </>
       ))}
     </ul>
   );

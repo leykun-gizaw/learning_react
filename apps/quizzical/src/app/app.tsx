@@ -12,7 +12,7 @@ export function App() {
   };
 
   return (
-    <div className="bg-[rgb(246,247,251)] m-10 mx-auto p-10 w-3/4 flex flex-col justify-center items-center gap-10">
+    <div className="bg-[rgb(246,247,251)] max-w-[90rem] p-10 flex flex-col justify-center items-center gap-10">
       {questions === null ? (
         <Starter handleStartQuiz={handleStartQuiz} />
       ) : (
