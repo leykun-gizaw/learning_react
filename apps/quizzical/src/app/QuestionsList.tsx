@@ -1,4 +1,5 @@
 import { Question } from '@learning-react/otdb_api';
+import { decode } from 'html-entities';
 
 export default function QuestionsList({
   questions,
@@ -26,7 +27,9 @@ export default function QuestionsList({
             htmlFor={choice}
             className="block cursor-pointer border border-[rgb(41,50,100)] peer-checked:bg-[rgb(214,219,245)] p-1 rounded-lg hover:bg-[rgb(214,219,245)]"
           >
-            <span className="peer-checked:text-white">{choice}</span>
+            <span className="peer-checked:text-white">
+              {decode(choice, { level: 'html5' })}
+            </span>
           </label>
         </li>
       );
@@ -38,7 +41,9 @@ export default function QuestionsList({
       {questions.map((question, index: number) => (
         <>
           <li key={index} className="mb-4">
-            <h2 className="text-xl font-semibold">{question.question}</h2>
+            <h2 className="text-xl font-semibold">
+              {decode(question.question, { level: 'html5' })}
+            </h2>
             <ul className="mt-2 flex flex-wrap gap-3">
               {createChoicesList(question)}
             </ul>
