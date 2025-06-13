@@ -39,8 +39,8 @@ export default function QuestionsList({
   return (
     <ul className="text-[rgb(41,50,100)] mt-10">
       {questions.map((question, index: number) => (
-        <>
-          <li key={index} className="mb-4">
+        <div key={index}>
+          <li className="mb-4">
             <h2 className="text-xl font-semibold">
               {decode(question.question, { level: 'html5' })}
             </h2>
@@ -49,7 +49,7 @@ export default function QuestionsList({
             </ul>
           </li>
           <hr className="border-[rgb(220,222,240)] my-4" />
-        </>
+        </div>
       ))}
     </ul>
   );
