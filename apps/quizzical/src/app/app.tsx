@@ -2,13 +2,18 @@ import React from 'react';
 import Starter from './Starter';
 import { fetchQuestions, Question } from '@learning-react/otdb_api';
 import QuestionsList from './QuestionsList';
+import { transformQuestions } from '../utils/helpers';
+import { TransformedQuestion } from '../utils/types';
 
 export function App() {
-  const [questions, setQuestions] = React.useState<Question[] | null>(null);
+  const [questions, setQuestions] = React.useState<
+    TransformedQuestion[] | null
+  >(null);
 
   const handleStartQuiz = async () => {
     const response = await fetchQuestions();
-    setQuestions(response.results);
+    console.log(transformQuestions(response.results));
+    setQuestions(transformQuestions(response.results));
   };
 
   return (
