@@ -28,18 +28,19 @@ export default function Question({
           <label
             htmlFor={choice.id}
             className={clsx(
-              'block cursor-pointer border border-[rgb(41,50,100)] py-1 px-4 rounded-xl hover:bg-[rgb(214,219,245)]',
-              'peer-checked:bg-[rgb(214,219,245)] peer-checked:border-none',
+              'block cursor-pointer ',
+              'py-1 px-4 rounded-xl hover:bg-[rgb(214,219,245)]',
               {
-                'bg-[rgb(148,215,162)] peer-checked:bg-[rgb(148,215,162)]':
+                'border border-[rgb(41,50,100)]': !choice.isChosen,
+                'bg-[rgb(214,219,245)] border-none':
+                  !submitted && choice.isChosen,
+                'bg-[rgb(148,215,162)] hover:bg-[rgb(148,215,162)]':
                   submitted && choice.id === question.correct_answer_id,
-                'peer-checked:bg-[rgb(255,204,204)]':
+                'bg-[rgb(255,204,204)] hover:bg-[rgb(255,204,204)]':
                   submitted &&
                   choice.isChosen &&
                   choice.id !== question.correct_answer_id,
                 'opacity-30 cursor-not-allowed': submitted && !choice.isChosen,
-                'peer-checked:border-[rgb(41,50,100)]':
-                  submitted && choice.isChosen,
               }
             )}
           >
