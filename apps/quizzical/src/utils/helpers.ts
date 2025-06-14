@@ -28,6 +28,7 @@ export const transformQuestions = (
       type: question.type,
       difficulty: question.difficulty,
       question: question.question,
+      user_answer_id: null,
       correct_answer_id: correct_answer_id,
       choices: choicesTxt,
     };

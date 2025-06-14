@@ -11,7 +11,6 @@ export default function Question({
   handleChoose: (question_id: string, choice_id: string) => void;
   submitted: boolean;
 }) {
-  console.log(question);
   const createChoicesList = (question: TransformedQuestion) => {
     return question.choices.map((choice, index) => {
       return (

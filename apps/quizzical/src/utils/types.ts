@@ -4,6 +4,7 @@ export interface TransformedQuestion {
   type: string;
   difficulty: string;
   question: string;
+  user_answer_id: string | null;
   correct_answer_id: string;
   choices: Choice[];
 }

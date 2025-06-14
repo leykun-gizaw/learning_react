@@ -7,10 +7,15 @@ import { TransformedQuestion } from '../utils/types';
 
 export function App() {
   const [questions, setQuestions] = React.useState<TransformedQuestion[]>([]);
+  const [submitted, setSubmitted] = React.useState(false);
 
   const handleStartQuiz = async () => {
     const response = await fetchQuestions();
     setQuestions(transformQuestions(response.results));
+  };
+  const handlePlay = async () => {
+    await handleStartQuiz();
+    setSubmitted(false);
   };
 
   const handleChoose = (question_id: string, choice_id: string) => {
@@ -26,6 +31,7 @@ export function App() {
         if (choice.id === choice_id) choice.isChosen = true;
         else choice.isChosen = false;
       });
+      updatedQuestions[questionIndex].user_answer_id = choice_id;
       return updatedQuestions;
     });
   };
@@ -35,7 +41,13 @@ export function App() {
       {questions.length === 0 ? (
         <Starter handleStartQuiz={handleStartQuiz} />
       ) : (
-        <QuestionsList questions={questions} handleChoose={handleChoose} />
+        <QuestionsList
+          questions={questions}
+          submitted={submitted}
+          setSubmitted={setSubmitted}
+          handleChoose={handleChoose}
+          handlePlay={handlePlay}
+        />
       )}
     </div>
   );
