@@ -15,12 +15,6 @@ export default function QuestionsList({
   handleChoose: (question_id: string, choice_id: string) => void;
   handlePlay: () => void;
 }) {
-  const submitAnswers = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formEl = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(formEl);
-    console.log(formData);
-  };
   const correctAnswersCount = questions.reduce((acc, curQuestion) => {
     return curQuestion.correct_answer_id === curQuestion.user_answer_id
       ? acc + 1
@@ -30,7 +24,7 @@ export default function QuestionsList({
     return (
       <button
         className="
-            text-xl text-[rgb(256,247,251)] 
+            font-semibold text-[rgb(256,247,251)] 
             p-2 rounded-md bg-[rgb(76,90,158)] 
             hover:bg-[rgb(70,84,152)] active:bg-[rgb(76,90,158)] w-fit
           "
@@ -42,7 +36,7 @@ export default function QuestionsList({
   };
 
   return (
-    <form onSubmit={submitAnswers} className="flex flex-col items-center gap-5">
+    <>
       <ul className="text-[rgb(41,50,100)] mt-10">
         {questions.map((question) => (
           <Question
@@ -63,6 +57,6 @@ export default function QuestionsList({
           ? generateActionButton('Play Again', handlePlay)
           : generateActionButton('Check Answers', () => setSubmitted(true))}
       </div>
-    </form>
+    </>
   );
 }
