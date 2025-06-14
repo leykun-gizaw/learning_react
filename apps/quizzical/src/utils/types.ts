@@ -4,12 +4,12 @@ export interface TransformedQuestion {
   type: string;
   difficulty: string;
   question: string;
+  correct_answer_id: string;
   choices: Choice[];
 }
 
 export type Choice = {
   id: string;
   text: string;
-  isCorrect: boolean;
-  chosen: boolean;
+  isChosen: boolean;
 };

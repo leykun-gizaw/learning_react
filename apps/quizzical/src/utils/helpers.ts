@@ -6,11 +6,21 @@ export const transformQuestions = (
   questions: Question[]
 ): TransformedQuestion[] => {
   const transformed: TransformedQuestion[] = questions.map((question) => {
-    const choicesTxt = [...question.incorrect_answers];
+    const choicesTxt = question.incorrect_answers.map((incorrect_answer) => ({
+      id: nanoid(),
+      text: incorrect_answer,
+      isChosen: false,
+    }));
+    const correct_answer_id = nanoid();
+    const correct_answer = {
+      id: correct_answer_id,
+      text: question.correct_answer,
+      isChosen: false,
+    };
     choicesTxt.splice(
       Math.floor(Math.random() * question.incorrect_answers.length) + 1,
       0,
-      question.correct_answer
+      correct_answer
     );
     return {
       id: nanoid(),
@@ -18,12 +28,8 @@ export const transformQuestions = (
       type: question.type,
       difficulty: question.difficulty,
       question: question.question,
-      choices: choicesTxt.map((choice) => ({
-        id: nanoid(),
-        text: choice,
-        isCorrect: choice === question.correct_answer,
-        chosen: false,
-      })),
+      correct_answer_id: correct_answer_id,
+      choices: choicesTxt,
     };
   });
   return transformed;

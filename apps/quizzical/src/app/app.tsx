@@ -3,31 +3,28 @@ import Starter from './Starter';
 import { fetchQuestions } from '@learning-react/otdb_api';
 import QuestionsList from './QuestionsList';
 import { transformQuestions } from '../utils/helpers';
-import { Choice, TransformedQuestion } from '../utils/types';
+import { TransformedQuestion } from '../utils/types';
 
 export function App() {
-  const [questions, setQuestions] = React.useState<
-    TransformedQuestion[] | null
-  >(null);
+  const [questions, setQuestions] = React.useState<TransformedQuestion[]>([]);
 
   const handleStartQuiz = async () => {
     const response = await fetchQuestions();
     setQuestions(transformQuestions(response.results));
   };
-  const handleChoose = (answerList: string[][]) => {
-    setQuestions((prevQuestions) => {
-      const updatedQuestions: TransformedQuestion[] = [];
 
-      answerList.forEach((answer) => {
-        prevQuestions?.forEach((question) => {
-          const choices = [...question.choices];
-          if (answer[0] === question.id) {
-            choices.forEach((choice) => {
-              if (answer[1] === choice.id) choice.chosen = true;
-            });
-          }
-          updatedQuestions.push({ ...question, choices });
-        });
+  const handleChoose = (question_id: string, choice_id: string) => {
+    setQuestions((prevQuestions) => {
+      const updatedQuestions = prevQuestions.map(
+        (prevQuestion) =>
+          JSON.parse(JSON.stringify(prevQuestion)) as TransformedQuestion
+      );
+      const questionIndex = updatedQuestions.findIndex(
+        (question) => question.id === question_id
+      );
+      updatedQuestions[questionIndex].choices.forEach((choice) => {
+        if (choice.id === choice_id) choice.isChosen = true;
+        else choice.isChosen = false;
       });
       return updatedQuestions;
     });
@@ -35,7 +32,7 @@ export function App() {
 
   return (
     <div className="bg-[rgb(246,247,251)] max-w-[55rem] py-10 px-20 flex flex-col justify-center items-center gap-10">
-      {questions === null ? (
+      {questions.length === 0 ? (
         <Starter handleStartQuiz={handleStartQuiz} />
       ) : (
         <QuestionsList questions={questions} handleChoose={handleChoose} />
