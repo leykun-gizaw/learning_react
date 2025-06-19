@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 export const transformQuestions = (
   questions: Question[]
 ): TransformedQuestion[] => {
-  const transformed: TransformedQuestion[] = questions.map((question) => {
+  return questions.map((question) => {
     const choicesTxt = question.incorrect_answers.map((incorrect_answer) => ({
       id: nanoid(),
       text: incorrect_answer,
@@ -33,5 +33,4 @@ export const transformQuestions = (
       choices: choicesTxt,
     };
   });
-  return transformed;
 };
