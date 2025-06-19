@@ -23,6 +23,9 @@
     },
     {
       "path": "./libs/otdb_api"
+    },
+    {
+      "path": "./libs/shared/ui-components"
     }
   ]
 }
