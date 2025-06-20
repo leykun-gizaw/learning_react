@@ -48,3 +48,6 @@ vitest.config.*.timestamp*
 
 # app specific environment files
 apps/*/.env
+
+
+storybook-static
