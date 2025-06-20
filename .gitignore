@@ -31,6 +31,13 @@ node_modules
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
+.yarn/install-state.gz
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 testem.log
 /typings
 
@@ -48,6 +55,5 @@ vitest.config.*.timestamp*
 
 # app specific environment files
 apps/*/.env
-
 
 storybook-static
