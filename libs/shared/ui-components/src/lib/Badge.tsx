@@ -1,10 +1,17 @@
 import clsx from 'clsx';
 
-export function Badge({
-  type,
-  color,
-  content,
-}: {
+const colorAssociation = {
+  gray: 'bg-[#F3F4F6] text-[#1F2937]',
+  red: 'bg-[#FEE2E2] text-[#991B1B]',
+  yellow: 'bg-[#FEF3C7] text-[#92400E]',
+  green: 'bg-[#D1FAE5] text-[#065F46]',
+  blue: 'bg-[#DBEAFE] text-[#1E40AF]',
+  indigo: 'bg-[#E0E7FF] text-[#3730A3]',
+  purple: 'bg-[#EDE9FE] text-[#5B21B6]',
+  pink: 'bg-[#FCE7F3] text-[#9D174D]',
+};
+
+type BadgePropTypes = {
   type: 'square' | 'pill';
   color:
     | 'gray'
@@ -16,21 +23,12 @@ export function Badge({
     | 'purple'
     | 'pink';
   content: string;
-}) {
-  const colorAssociation = {
-    gray: { bg: 'bg-[#F3F4F6]', txt: 'text-[#1F2937]' },
-    red: { bg: 'bg-[#FEE2E2]', txt: 'text-[#991B1B]' },
-    yellow: { bg: 'bg-[#FEF3C7]', txt: 'text-[#92400E]' },
-    green: { bg: 'bg-[#D1FAE5]', txt: 'text-[#065F46]' },
-    blue: { bg: 'bg-[#DBEAFE]', txt: 'text-[#1E40AF]' },
-    indigo: { bg: 'bg-[#E0E7FF]', txt: 'text-[#3730A3]' },
-    purple: { bg: 'bg-[#EDE9FE]', txt: 'text-[#5B21B6]' },
-    pink: { bg: 'bg-[#FCE7F3]', txt: 'text-[#9D174D]' },
-  };
+};
+
+export function Badge({ type, color, content }: BadgePropTypes) {
   const badgeClasses = clsx(
     type === 'pill' ? 'rounded-full' : 'rounded-lg',
-    colorAssociation[color].bg,
-    colorAssociation[color].txt,
+    colorAssociation[color],
     'w-fit',
     'py-1',
     'px-3'
