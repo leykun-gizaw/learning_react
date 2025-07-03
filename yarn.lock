@@ -2199,6 +2199,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^9.9.0":
+  version: 9.9.0
+  resolution: "@faker-js/faker@npm:9.9.0"
+  checksum: 10c0/02107cb6915217b4831fa4b261603165972eb7f09d2ab2e1d4b75807df2d425a2bac8621cddbfdcc158c2c447c2bce2e14939d51c4a63fbd832df55452e7f73c
+  languageName: node
+  linkType: hard
+
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -2686,6 +2693,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@learning-react/lazy-suspense@workspace:apps/lazy-suspense":
+  version: 0.0.0-use.local
+  resolution: "@learning-react/lazy-suspense@workspace:apps/lazy-suspense"
+  languageName: unknown
+  linkType: soft
+
 "@learning-react/meme_generator@workspace:apps/meme_generator":
   version: 0.0.0-use.local
   resolution: "@learning-react/meme_generator@workspace:apps/meme_generator"
@@ -2711,6 +2724,7 @@ __metadata:
     "@babel/core": "npm:^7.14.5"
     "@babel/preset-react": "npm:^7.14.5"
     "@eslint/js": "npm:^9.8.0"
+    "@faker-js/faker": "npm:^9.9.0"
     "@huggingface/inference": "npm:^3.15.0"
     "@nx/eslint": "npm:21.1.2"
     "@nx/eslint-plugin": "npm:21.1.2"
@@ -2774,12 +2788,6 @@ __metadata:
 "@learning-react/ui-components@workspace:libs/shared/ui-components":
   version: 0.0.0-use.local
   resolution: "@learning-react/ui-components@workspace:libs/shared/ui-components"
-  languageName: unknown
-  linkType: soft
-
-"@learning-react/ui@workspace:libs/shared/ui":
-  version: 0.0.0-use.local
-  resolution: "@learning-react/ui@workspace:libs/shared/ui"
   languageName: unknown
   linkType: soft
 
