@@ -1,5 +1,8 @@
-import React from 'react';
-import ProductsList from './ProductList';
+import React, { lazy } from 'react';
+
+const ProductsList = lazy(() => {
+  return import('./ProductList');
+});
 
 export function App() {
   const [count, setCount] = React.useState(0);
@@ -34,7 +37,9 @@ export function App() {
         >
           {showProducts ? 'Hide' : 'Show'} Products
         </button>
-        <div>{showProducts && <ProductsList />}</div>
+        <React.Suspense fallback={<p>Loading...</p>}>
+          <div>{showProducts && <ProductsList />}</div>
+        </React.Suspense>
       </div>
     </div>
   );
