@@ -26,9 +26,6 @@
     },
     {
       "path": "./libs/shared/ui-components"
-    },
-    {
-      "path": "./libs/shared/ui"
     }
   ],
   "ts-node": {
