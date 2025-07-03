@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
+import { FakeProductType } from '../definitions';
 
-const products = new Array(3).fill(null).map(() => ({
+export const products: FakeProductType[] = new Array(3).fill(null).map(() => ({
   id: faker.database.mongodbObjectId(),
   name: faker.commerce.productName(),
   description: faker.commerce.productDescription(),
@@ -9,5 +10,3 @@ const products = new Array(3).fill(null).map(() => ({
   department: faker.commerce.department(),
   quantity: faker.number.int({ min: 0, max: 100 }),
 }));
-
-export default products;
